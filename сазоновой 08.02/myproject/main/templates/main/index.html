@@ -1,0 +1,47 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+Список товаров
+{% endblock %}
+
+{% block content %}
+    <div class="zalogo"><h1>Список товаров</h1></div>
+<div class="container p-3 border">
+    <form method="get" class="form-filter">
+        <div>
+            {{ tasks.form.as_p }}
+            <button type="submit" class="btn btn-primary">Фильтровать</button>
+        </div>
+    </form>
+</div>
+    {% if tasks %}
+<table cellspacing="0">
+    <tr>
+        <th>№</th>
+        <th>Наименование</th>
+        <th>Цена</th>
+        <th>Количество</th>
+        <th>Производитель</th>
+        <th>Действия</th>
+    </tr>
+
+        {% for elem in tasks.qs %}
+    <tr>
+            <td>{{ elem.number }}</td>
+            <td>{{ elem.name }}</td>
+            <td>{{ elem.price }}</td>
+            <td>{{ elem.quantity }}</td>
+            <td>{{ elem.manufacturer }}</td>
+            
+
+            <td><a href="{% url 'task-delete' elem.id %}" class="btn btn-warning">Удалить</a>
+            <a href="{% url 'task-update' elem.id %}" class="btn btn-info">Редактировать</a></td>
+    </tr>
+    
+        {% endfor %}
+</table>
+    {% else %}
+<p>У нас нет товаров</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+Добавить товар
+{% endblock %}
+
+{% block content %}
+    <div class="zalogo"><h1>Добавить товар</h1></div>
+    <form method="post">
+        <h4>Новый товар</h4>
+        <div class="form">
+        {% csrf_token %}
+        {{ form.number }}<br>
+        {{ form.name }}<br>
+        {{ form.price }}<br>
+        {{ form.quantity }}<br>
+        {{ form.manufacturer }}<br></div>
+      <button type="submit" class="btn btn-success" style="background-color: #6ed47b;">Сохранить</button>
+      <span>{{ error }}</span>
+    </form>
+{% endblock %}
